@@ -1,0 +1,110 @@
+
+<html>
+<head>
+	<title>WebCam Homework</title>
+</head>
+
+<body>
+<div class="streamm">
+<div class="videoo"><video id="video" width="640" height="480" autoplay></video></div>
+
+<div class="canvass">
+ <center><h2 class="fontcanvas">Photo</h2></center><canvas id="canvass" width="320" height="240"></canvas>
+<br>
+<center>
+<button class="savebutton">Save a Photo</button>
+</center>
+</div>
+
+</div>
+<style>
+.savebutton{margin-left: 30px;}
+canvas{
+border-radius: 15px;
+border:solid;
+color: white ;
+display: flex;
+margin-left: 80px;
+justify-content: end;
+}
+.fontcanvas{color: white; font-family:cursive;font-size: 20pt;}
+video{
+border-radius: 15px;
+border-width: 20px;
+color:white;
+border:solid;
+background: ;
+;
+}
+.streamm{background: ; display: flex;width: 100%;margin-top: 100px}
+.videoo{background: ; width: 70%;display: flex;justify-content: end;}
+.canvass{background: ;width: 28%;margin-top: 40px;}
+body{background:url(R.jfif);background-size: cover;}
+
+</style>
+<center>
+<br><br>
+<button id="onbtn" onclick="cameraon()">Open Webcam</button>
+<button id="offbtn" onclick="cameraoff()">Close</button>
+<button id="click-photo">Click Photo</button>
+<br>
+<br>
+<br>
+<h1>Webcam</h1>
+<style>
+h1{font-size: 50pt;
+color: white;
+}
+
+</style>
+
+</center>
+<script>
+	//turn on stream video
+  var videoElem = document.getElementById("video");
+
+  function cameraon() {
+	if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+	  navigator.mediaDevices
+		.getUserMedia({
+		  video: true,
+		  audio: true,
+		})
+		.then(function (stream) {
+		  videoElem.srcObject = stream;
+		  videoElem.play();
+		})
+		.then(() => {
+		  isPlaying = true;
+		});
+	}
+  }
+// turn of 
+  function cameraoff() {
+	const stream = videoElem.srcObject;
+	if (stream) {
+	  const tracks = stream.getTracks();
+
+	  tracks.forEach(function (track) {
+		track.stop();
+	  });
+	  videoElem.srcObject = null;
+	}
+  }
+
+  //capture
+let click_button = document.querySelector("#click-photo");
+let canvas = document.querySelector("#canvass");
+
+click_button.addEventListener('click', function() {
+   	canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+   	let image_data_url = canvas.toDataURL('image/jpeg');
+   	// data url of the image
+   	console.log(image_data_url);
+});                                                              
+
+
+</script>
+
+</body>
+</html>
