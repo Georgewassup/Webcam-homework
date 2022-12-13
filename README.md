@@ -1,5 +1,5 @@
 # Webcam-homework
-webcam with turn on/turn off and take screenshot buttons| save a photo buttton is coming soon 
+webcam with turn on/turn off and take screenshot buttons| save a photo button is coming soon 
 
 
 #preview 
